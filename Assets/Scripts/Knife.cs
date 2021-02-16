@@ -17,8 +17,10 @@ public class Knife : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print(6565);
-        HitKnife();
+        if (collision.transform.GetComponent<Knife>())
+        {
+            HitKnife();
+        }
     }
 
     private void FixedUpdate()

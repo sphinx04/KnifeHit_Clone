@@ -10,6 +10,8 @@ public class Log : MonoBehaviour
     public float stickDepth;
     public bool isRolling;
     private Rigidbody2D rb;
+    [SerializeField]
+    private AnimationCurve curve;
 
     private void Awake()
     {
@@ -19,12 +21,13 @@ public class Log : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Knife knife = collision.GetComponent<Knife>();
+        Transform obj = collision.transform.parent;
+        Knife knife = obj.GetComponent<Knife>();
         if (knife.isAimed && isRolling)
         {
             knife.HitLog();
-            collision.transform.parent = transform;
-            collision.transform.position = transform.position + new Vector3(0, stickDepth - transform.localScale.y / 2, 0);
+            obj.parent = transform;
+            obj.position = transform.position + new Vector3(0, stickDepth - transform.localScale.y / 2, 0);
         }
     }
 
@@ -32,11 +35,16 @@ public class Log : MonoBehaviour
     {
         isRolling = false;
     }
+
+    float percent = 0f;
+
     void Update()
     {
+        percent += Time.deltaTime;
+        print(percent);
         if (isRolling)
         {
-            transform.Rotate(0, 0, speed);
+            transform.Rotate(0, 0, curve.Evaluate(percent) * speed);
         }
     }
 }
