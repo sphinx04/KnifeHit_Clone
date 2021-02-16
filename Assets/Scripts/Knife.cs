@@ -11,16 +11,14 @@ public class Knife : MonoBehaviour
 
     private void Awake()
     {
+        Vibration.Init(); //replace later
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         print(6565);
-
-        Stop();
-        rb.gravityScale = 5;
-        Log.instance.Stop();
+        HitKnife();
     }
 
     private void FixedUpdate()
@@ -35,10 +33,19 @@ public class Knife : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         enabled = false;
     }
-    public void Stick()
+    public void HitLog()
     {
         rb.bodyType = RigidbodyType2D.Static;
         Stop();
         sticked = true;
+        Vibration.VibratePop();
+    }
+
+    public void HitKnife()
+    {
+        Stop();
+        Vibration.VibratePeek();
+        rb.gravityScale = 5;
+        Log.instance.Stop();
     }
 }

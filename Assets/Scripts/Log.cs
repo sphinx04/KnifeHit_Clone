@@ -22,7 +22,7 @@ public class Log : MonoBehaviour
         Knife knife = collision.GetComponent<Knife>();
         if (knife.isAimed && isRolling)
         {
-            knife.Stick();
+            knife.HitLog();
             collision.transform.parent = transform;
             collision.transform.position = transform.position + new Vector3(0, stickDepth - transform.localScale.y / 2, 0);
         }
