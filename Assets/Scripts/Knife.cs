@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,18 @@ public class Knife : MonoBehaviour
             HitKnife();
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isAimed && Log.instance.isRolling)
+        {
+            Apple apple = collision.GetComponent<Apple>();
+            Log log = collision.GetComponent<Log>();
+            if (log)
+                HitLog();
+            if (apple)
+                apple.Hit();
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -41,6 +54,12 @@ public class Knife : MonoBehaviour
         Stop();
         sticked = true;
         Vibration.VibratePop();
+        transform.parent = Log.instance.transform;
+        transform.position = Log.instance.transform.position + new Vector3(0, Log.instance.stickDepth - Log.instance.transform.localScale.y / 2, 0);
+    }
+    public void HitApple()
+    {
+
     }
 
     public void HitKnife()

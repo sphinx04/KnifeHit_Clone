@@ -18,17 +18,26 @@ public class Log : MonoBehaviour
         isRolling = true;
         rb = GetComponent<Rigidbody2D>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Transform obj = collision.transform.parent;
-        Knife knife = obj.GetComponent<Knife>();
-        if (knife.isAimed && isRolling)
-        {
-            knife.HitLog();
-            obj.parent = transform;
-            obj.position = transform.position + new Vector3(0, stickDepth - transform.localScale.y / 2, 0);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    Transform obj = collision.transform.parent;
+    //    Knife knife = obj.GetComponent<Knife>();
+    //    if (knife && knife.isAimed && isRolling)
+    //    {
+    //        knife.HitLog();
+    //    }
+    //}
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    Transform obj = collision.transform.parent;
+    //    Knife knife = obj.GetComponent<Knife>();
+    //    if (knife && knife.isAimed && isRolling)
+    //    {
+    //        knife.HitLog();
+    //        obj.parent = transform;
+    //        obj.position = transform.position + new Vector3(0, stickDepth - transform.localScale.y / 2, 0);
+    //    }
+    //}
 
     public void Stop()
     {

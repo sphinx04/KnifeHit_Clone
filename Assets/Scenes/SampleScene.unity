@@ -257,6 +257,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4246609845155084834, guid: f0431f9c3a8fb4b2cadd993ccd4c20d9, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8066842866746244712, guid: f0431f9c3a8fb4b2cadd993ccd4c20d9, type: 3}
       propertyPath: m_Name
       value: KnifeSpawner
