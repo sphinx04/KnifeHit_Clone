@@ -5,13 +5,12 @@ using UnityEngine.Events;
 
 public class Log : MonoBehaviour
 {
-    public static Log instance;
-    public float speed;
     public float stickDepth;
     public bool isRolling;
+    public static Log instance;
+    public float speed;
     private Rigidbody2D rb;
-    [SerializeField]
-    private AnimationCurve curve;
+    public AnimationCurve curve;
 
     private void Awake()
     {
@@ -41,7 +40,6 @@ public class Log : MonoBehaviour
     void Update()
     {
         percent += Time.deltaTime;
-        print(percent);
         if (isRolling)
         {
             transform.Rotate(0, 0, curve.Evaluate(percent) * speed);
