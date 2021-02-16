@@ -12,7 +12,7 @@ public class Knife : MonoBehaviour
 
     private void Awake()
     {
-        Vibration.Init(); //replace later
+        Vibration.Init();
         rb = GetComponent<Rigidbody2D>();
     }
 
