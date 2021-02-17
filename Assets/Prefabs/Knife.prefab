@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ae90fe404354278b2a70f07ad0f2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAimed: 1
+  isAimed: 0
   speed: 1
   sticked: 0
 --- !u!50 &6133291360059333643

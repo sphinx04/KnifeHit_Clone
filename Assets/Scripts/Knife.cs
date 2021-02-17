@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
-    public bool isAimed = true;
+    public bool isAimed = false;
     public float speed;
     public bool sticked;
     private Rigidbody2D rb;
@@ -30,7 +30,10 @@ public class Knife : MonoBehaviour
             Apple apple = collision.GetComponent<Apple>();
             Log log = collision.GetComponent<Log>();
             if (log)
+            {
                 HitLog();
+                KnifeSpawner.instance.SpawnKnife();
+            }
             if (apple)
                 apple.Hit();
         }
@@ -40,6 +43,11 @@ public class Knife : MonoBehaviour
     {
         if (isAimed)
             rb.velocity = new Vector2(0, speed * 10f);
+    }
+
+    public void Throw()
+    {
+        isAimed = true;
     }
 
     public void Stop()
@@ -69,6 +77,6 @@ public class Knife : MonoBehaviour
         rb.gravityScale = 5;
         Log.instance.Stop();
         GetComponentsInChildren<CircleCollider2D>()[0].enabled = false; //это ужасно
-        GetComponentsInChildren<CircleCollider2D>()[1].enabled = false; 
+        GetComponentsInChildren<CircleCollider2D>()[1].enabled = false;
     }
 }

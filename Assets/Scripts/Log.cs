@@ -66,7 +66,7 @@ public class Log : MonoBehaviour
             for (int i = 1; i <= stickedKnivesAmount; i++)
             {
                 print("init");
-                GameObject knife = KnifeSpawner.instance.knife;
+                GameObject knife = KnifeSpawner.instance.knifeObject;
                 int stepAngle = 360 / stickedKnivesAmount;
                 Instantiate(knife).GetComponent<Knife>().HitLog();
                 RotateLog(stepAngle);
