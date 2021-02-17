@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 7583101409739426111}
   - component: {fileID: 7583101409739426110}
   m_Layer: 0
-  m_Name: Log3D
+  m_Name: TestLog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,6 +231,9 @@ MonoBehaviour:
   stickDepth: 0.4
   isRolling: 1
   speed: 0
+  appleChance: 0
+  appleObject: {fileID: 6967452655344015148, guid: f2a9131e7bdb341a0a58e6c0085194fe, type: 3}
+  stickedKnivesAmount: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -351,6 +354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apple (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6967452655344015148, guid: f2a9131e7bdb341a0a58e6c0085194fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2a9131e7bdb341a0a58e6c0085194fe, type: 3}
 --- !u!4 &6835089687982011691 stripped
@@ -416,6 +423,10 @@ PrefabInstance:
     - target: {fileID: 6967452655344015148, guid: f2a9131e7bdb341a0a58e6c0085194fe, type: 3}
       propertyPath: m_Name
       value: Apple
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967452655344015148, guid: f2a9131e7bdb341a0a58e6c0085194fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2a9131e7bdb341a0a58e6c0085194fe, type: 3}

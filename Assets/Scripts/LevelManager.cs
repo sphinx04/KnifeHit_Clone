@@ -18,8 +18,6 @@ public class LevelManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
-		DontDestroyOnLoad(gameObject);
-
 
 		InitLog();
 	
@@ -27,9 +25,12 @@ public class LevelManager : MonoBehaviour
 	public void InitLog()
     {
 		Instantiate(levelInfo.logModel);
+
 		Log.instance.speed = levelInfo.logSpeed;
 		Log.instance.curve = levelInfo.logRollingCurve;
-    }
+		Log.instance.appleChance = levelInfo.appleChance;
+		Log.instance.stickedKnivesAmount = levelInfo.stickedKnivesAmount;
+	}
 }
 
 

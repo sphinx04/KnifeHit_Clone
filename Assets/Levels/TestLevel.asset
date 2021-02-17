@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TestLevel
   m_EditorClassIdentifier: 
   startKnifeAmount: 0
-  stickedKnifeAmount: 0
-  appleChance: 0
+  stickedKnivesAmount: 2
+  appleChance: 0.501
   logSpeed: 2.35
   logRollingCurve:
     serializedVersion: 2

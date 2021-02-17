@@ -59,7 +59,7 @@ public class Knife : MonoBehaviour
     }
     public void HitApple()
     {
-
+        //inc num
     }
 
     public void HitKnife()
@@ -68,5 +68,7 @@ public class Knife : MonoBehaviour
         Vibration.VibratePeek();
         rb.gravityScale = 5;
         Log.instance.Stop();
+        GetComponentsInChildren<CircleCollider2D>()[0].enabled = false; //это ужасно
+        GetComponentsInChildren<CircleCollider2D>()[1].enabled = false; 
     }
 }

@@ -4,7 +4,21 @@ using UnityEngine;
 
 public class KnifeSpawner : MonoBehaviour
 {
+    public static KnifeSpawner instance = null;
+
     public GameObject knife;
+
+    void Start()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance == this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Update()
     {
