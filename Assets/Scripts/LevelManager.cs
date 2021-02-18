@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 	}
 	public void InitLog()
     {
-		Instantiate(levelInfo.logModel);
+		Instantiate(levelInfo.logModel, Log.instance.transform);
 
 		Log.instance.speed = levelInfo.logSpeed;
 		Log.instance.curve = levelInfo.logRollingCurve;

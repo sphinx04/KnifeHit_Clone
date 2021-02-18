@@ -12,8 +12,9 @@ public class Log : MonoBehaviour
     public float appleChance;
     public GameObject appleObject;
     public int stickedKnivesAmount;
-    private Rigidbody2D rb;
     public AnimationCurve curve;
+    float percent;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
@@ -38,7 +39,6 @@ public class Log : MonoBehaviour
         isRolling = false;
     }
 
-    float percent = 0f;
 
     void Update()
     {
@@ -55,7 +55,9 @@ public class Log : MonoBehaviour
 
     private void GenerateApple()
     {
-        Instantiate(appleObject, transform).transform.position = new Vector3(0, transform.localScale.y / 2 + 0.05f, -10);
+        GameObject apple = Instantiate(appleObject);
+        apple.transform.position = new Vector3(0, transform.localScale.y / 2 + 0.05f, -10);
+        apple.transform.parent = transform;
         RotateLog(180 + 180 / stickedKnivesAmount);
     }
 
