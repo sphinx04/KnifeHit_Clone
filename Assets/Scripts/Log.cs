@@ -16,6 +16,10 @@ public class Log : MonoBehaviour
     float percent;
     private Rigidbody2D rb;
 
+    //[HideInInspector]
+    public List<Knife> knives;
+    public List<Apple> apples;
+
     private void Awake()
     {
         instance = this;
@@ -79,5 +83,27 @@ public class Log : MonoBehaviour
     public void RotateLog(float angle)
     {
         transform.Rotate(0, 0, angle);
+    }
+
+    public void Explode()
+    {
+        Transform logModel = transform.GetChild(0);
+        for (int i = 0; i < logModel.childCount; i++)
+        {
+            logModel.GetChild(i).GetComponent<Rigidbody>().AddExplosionForce(100f, new Vector3(), 3f);
+            logModel.GetChild(i).GetComponent<MeshCollider>().enabled = true;
+            logModel.GetChild(i).GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(0, 10), Random.Range(0, 10), Random.Range(0, 10)));
+            logModel.GetChild(i).GetComponent<Rigidbody>().useGravity = true;
+            logModel.GetChild(i).parent = null;
+
+            foreach (Knife knife in knives)
+            {
+                knife.FreeFall();
+            }
+            foreach (Apple apple in apples)
+            {
+                apple.FreeFall();
+            }
+        }
     }
 }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TestLevel
   m_EditorClassIdentifier: 
   startKnifeAmount: 0
-  stickedKnivesAmount: 4
-  appleChance: 0.938
+  stickedKnivesAmount: 3
+  appleChance: 0.25
   logSpeed: 2.35
   logRollingCurve:
     serializedVersion: 2
@@ -67,4 +67,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
-  logModel: {fileID: 7583101409739426109, guid: 636f548ca7d484a32b2ee466b68542df, type: 3}
+  logModel: {fileID: 8234091364114820669, guid: 273b0bdb2512e470cb7df18e0d2e3f76, type: 3}

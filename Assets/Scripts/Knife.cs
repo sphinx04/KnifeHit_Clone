@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +8,7 @@ public class Knife : MonoBehaviour
     public float speed;
     public bool sticked;
     private Rigidbody2D rb;
+    public TrailRenderer trail;
 
     private void Awake()
     {
@@ -55,6 +55,7 @@ public class Knife : MonoBehaviour
         isAimed = false;
         GetComponent<BoxCollider2D>().enabled = false;
         enabled = false;
+        trail.enabled = false;
     }
     public void HitLog()
     {
@@ -64,6 +65,7 @@ public class Knife : MonoBehaviour
         Vibration.VibratePop();
         transform.parent = Log.instance.transform;
         transform.position = Log.instance.transform.position + new Vector3(0, Log.instance.stickDepth - Log.instance.transform.localScale.y / 2, 0);
+        Log.instance.knives.Add(this);
     }
     public void HitApple()
     {
@@ -78,5 +80,15 @@ public class Knife : MonoBehaviour
         Log.instance.Stop();
         GetComponentsInChildren<CircleCollider2D>()[0].enabled = false; //это ужасно
         GetComponentsInChildren<CircleCollider2D>()[1].enabled = false;
+        Log.instance.Explode();
+    }
+
+    public void FreeFall()
+    {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = 0.5f;
+        rb.AddForce(new Vector2(Random.Range(-200, 200), 150));
+        rb.AddTorque(Random.Range(-5f, 5f));
+        transform.parent = null;
     }
 }
