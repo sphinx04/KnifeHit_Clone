@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,21 @@ public class KnifeSpawner : MonoBehaviour
     public static KnifeSpawner instance = null;
 
     public GameObject knifeObject;
+    private int currentKnifeAmount;
     private Knife knife;
+
+    public int GetCurrentKnifeAmount()
+    {
+        return currentKnifeAmount;
+    }
+
+    public void SetCurrentKnifeAmount(int value)
+    {
+        currentKnifeAmount = value;
+        OnKnifeAmountChange.Invoke();
+    }
+
+    public event Action OnKnifeAmountChange;
 
     void Start()
     {
@@ -38,9 +53,13 @@ public class KnifeSpawner : MonoBehaviour
     }
     public void ThrowKnife()
     {
-        knife = Instantiate(knifeObject, transform).GetComponent<Knife>();
-        knife.isAimed = true;
-        transform.GetChild(0).gameObject.SetActive(false);
+        if (GetCurrentKnifeAmount() > 0)
+        {
+            knife = Instantiate(knifeObject, transform).GetComponent<Knife>();
+            knife.isAimed = true;
+            transform.GetChild(0).gameObject.SetActive(false);
+            SetCurrentKnifeAmount(GetCurrentKnifeAmount() - 1);
+        }
     }
 
     public void SpawnKnife()

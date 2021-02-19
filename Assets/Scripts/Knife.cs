@@ -31,11 +31,21 @@ public class Knife : MonoBehaviour
             Log log = collision.GetComponent<Log>();
             if (log)
             {
-                HitLog();
-                KnifeSpawner.instance.SpawnKnife();
+                if (KnifeSpawner.instance.GetCurrentKnifeAmount() > 0)
+                {
+                    HitLog();
+                    KnifeSpawner.instance.SpawnKnife();
+                }
+                else
+                {
+                    rb.bodyType = RigidbodyType2D.Kinematic;
+                    Log.instance.Explode();
+                }
             }
             if (apple)
+            {
                 apple.Hit();
+            }
         }
     }
 
@@ -53,7 +63,6 @@ public class Knife : MonoBehaviour
     public void Stop()
     {
         isAimed = false;
-        GetComponent<BoxCollider2D>().enabled = false;
         enabled = false;
         trail.enabled = false;
     }
@@ -80,7 +89,6 @@ public class Knife : MonoBehaviour
         Log.instance.Stop();
         GetComponentsInChildren<CircleCollider2D>()[0].enabled = false; //это ужасно
         GetComponentsInChildren<CircleCollider2D>()[1].enabled = false;
-        Log.instance.Explode();
     }
 
     public void FreeFall()

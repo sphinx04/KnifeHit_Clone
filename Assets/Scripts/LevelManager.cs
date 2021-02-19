@@ -20,7 +20,9 @@ public class LevelManager : MonoBehaviour
 		}
 
 		InitLog();
-	
+		InitKnifeSpawner();
+
+
 	}
 	public void InitLog()
     {
@@ -30,6 +32,11 @@ public class LevelManager : MonoBehaviour
 		Log.instance.curve = levelInfo.logRollingCurve;
 		Log.instance.appleChance = levelInfo.appleChance;
 		Log.instance.stickedKnivesAmount = levelInfo.stickedKnivesAmount;
+	}
+
+	public void InitKnifeSpawner()
+    {
+		KnifeSpawner.instance.SetCurrentKnifeAmount(levelInfo.startKnifeAmount);
 	}
 }
 

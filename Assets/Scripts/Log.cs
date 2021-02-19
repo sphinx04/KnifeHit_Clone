@@ -20,6 +20,8 @@ public class Log : MonoBehaviour
     public List<Knife> knives;
     public List<Apple> apples;
 
+    private List<Transform> pieces;
+
     private void Awake()
     {
         instance = this;
@@ -32,8 +34,14 @@ public class Log : MonoBehaviour
         {
             GenerateApple();
         }
-        print(stickedKnivesAmount);
         GenerateKnives();
+
+        pieces = new List<Transform>();
+
+        for (int i = 0; i < transform.GetChild(0).childCount; i++)
+        {
+            pieces.Add(transform.GetChild(0).GetChild(i));
+        }
 
         RotateLog(Random.Range(0, 180));
     }
@@ -62,7 +70,9 @@ public class Log : MonoBehaviour
         GameObject apple = Instantiate(appleObject);
         apple.transform.position = new Vector3(0, transform.localScale.y / 2 + 0.05f, -10);
         apple.transform.parent = transform;
-        RotateLog(180 + 180 / stickedKnivesAmount);
+
+        if (stickedKnivesAmount > 0)
+            RotateLog(180 + 180 / stickedKnivesAmount);
     }
 
     private void GenerateKnives()
@@ -71,7 +81,6 @@ public class Log : MonoBehaviour
         {
             for (int i = 1; i <= stickedKnivesAmount; i++)
             {
-                print("init");
                 GameObject knife = KnifeSpawner.instance.knifeObject;
                 int stepAngle = 360 / stickedKnivesAmount;
                 Instantiate(knife).GetComponent<Knife>().HitLog();
@@ -87,23 +96,23 @@ public class Log : MonoBehaviour
 
     public void Explode()
     {
-        Transform logModel = transform.GetChild(0);
-        for (int i = 0; i < logModel.childCount; i++)
-        {
-            logModel.GetChild(i).GetComponent<Rigidbody>().AddExplosionForce(100f, new Vector3(), 3f);
-            logModel.GetChild(i).GetComponent<MeshCollider>().enabled = true;
-            logModel.GetChild(i).GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(0, 10), Random.Range(0, 10), Random.Range(0, 10)));
-            logModel.GetChild(i).GetComponent<Rigidbody>().useGravity = true;
-            logModel.GetChild(i).parent = null;
+        Stop();
 
-            foreach (Knife knife in knives)
-            {
-                knife.FreeFall();
-            }
-            foreach (Apple apple in apples)
-            {
-                apple.FreeFall();
-            }
+        foreach (Knife knife in knives)
+        {
+            knife.FreeFall();
+        }
+        foreach (Apple apple in apples)
+        {
+            apple.FreeFall();
+        }
+        foreach(Transform piece in pieces)
+        {
+            piece.GetComponent<MeshCollider>().enabled = true;
+            piece.GetComponent<Rigidbody>().AddExplosionForce(100f, new Vector3(), 3f);
+            piece.GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(0, 10), Random.Range(0, 10), Random.Range(0, 10)));
+            piece.GetComponent<Rigidbody>().useGravity = true;
+            piece.parent = null;
         }
     }
 }

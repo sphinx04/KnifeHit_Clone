@@ -15,8 +15,7 @@ public class Apple : MonoBehaviour
     }
     public void Hit()
     {
-        print("apple");
-        for(int i = 0; i < sprites.Count; i++)
+        for (int i = 0; i < sprites.Count; i++)
         {
             GameObject piece = new GameObject();
             piece.transform.position = transform.position;
@@ -25,6 +24,8 @@ public class Apple : MonoBehaviour
             piece.GetComponent<Rigidbody2D>().AddForce(new Vector2((1 - i * 2) * 50f, 100f));
             piece.AddComponent<SpriteRenderer>().sprite = sprites[i];
         }
+        PlayerPrefs.SetInt("apples", PlayerPrefs.GetInt("apples") + 1);
+        print(PlayerPrefs.GetInt("apples"));
         Destroy(gameObject);
 
         Log.instance.apples.Remove(this);
