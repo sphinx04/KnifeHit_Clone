@@ -24,7 +24,7 @@ public class KnifeSpawner : MonoBehaviour
 
     public event Action OnKnifeAmountChange;
 
-    void Start()
+    void Awake()
     {
         if (instance == null)
         {
@@ -34,7 +34,10 @@ public class KnifeSpawner : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    private void Start()
+    {
         SpawnKnife();
     }
 

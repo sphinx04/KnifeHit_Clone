@@ -76,10 +76,6 @@ public class Knife : MonoBehaviour
         transform.position = Log.instance.transform.position + new Vector3(0, Log.instance.stickDepth - Log.instance.transform.localScale.y / 2, 0);
         Log.instance.knives.Add(this);
     }
-    public void HitApple()
-    {
-        //inc num
-    }
 
     public void HitKnife()
     {

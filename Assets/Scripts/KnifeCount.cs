@@ -10,8 +10,7 @@ public class KnifeCount : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI text;
 
-
-    private void OnEnable() => spawner.OnKnifeAmountChange += UpdateValue;
+    private void OnEnable() => KnifeSpawner.instance.OnKnifeAmountChange += UpdateValue;
     private void OnDisable() => spawner.OnKnifeAmountChange -= UpdateValue;
 
     public void UpdateValue() => text.SetText(spawner.GetCurrentKnifeAmount().ToString());

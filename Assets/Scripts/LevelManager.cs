@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager instance = null;
+	public static LevelManager instance = null;
 
 	public Level levelInfo;
+	public GameObject UIManager;
 
-	void Start()
+
+	void Awake()
 	{
 		if (instance == null)
-		{ 
-			instance = this; 
+		{
+			instance = this;
 		}
 		else if (instance == this)
 		{
 			Destroy(gameObject);
 		}
+	}
 
+	private void Start()
+	{
+		InitUI();
 		InitLog();
 		InitKnifeSpawner();
-
-
 	}
+
 	public void InitLog()
-    {
+	{
 		Instantiate(levelInfo.logModel, Log.instance.transform);
 
 		Log.instance.speed = levelInfo.logSpeed;
@@ -35,8 +40,14 @@ public class LevelManager : MonoBehaviour
 	}
 
 	public void InitKnifeSpawner()
-    {
+	{
 		KnifeSpawner.instance.SetCurrentKnifeAmount(levelInfo.startKnifeAmount);
+	}
+
+	public void InitUI()
+	{
+		UIManager.SetActive(true);
+		print("INIT UI");
 	}
 }
 
