@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,6 +21,8 @@ public class Log : MonoBehaviour
     public List<Apple> apples;
 
     private List<Transform> pieces;
+    private bool shaking;
+    private Vector3 logPosition;
 
     private void Awake()
     {
@@ -46,7 +47,14 @@ public class Log : MonoBehaviour
 
         InitPieces();
 
-        RotateLog(UnityEngine.Random.Range(0, 180));
+        RotateLog(Random.Range(0, 180));
+
+        logPosition = transform.position;
+    }
+
+    public void ShakeLog()
+    {
+        GetComponent<Animator>().SetTrigger("shake");
     }
 
     public void InitPieces()
@@ -72,10 +80,11 @@ public class Log : MonoBehaviour
         {
             RotateLog(curve.Evaluate(percent) * speed);
         }
+
     }
     private bool isAppleGenerating()
     {
-        return UnityEngine.Random.Range(0f, 1f) <= appleChance;
+        return Random.Range(0f, 1f) <= appleChance;
     }
 
     private void GenerateApple()
@@ -126,6 +135,7 @@ public class Log : MonoBehaviour
             piece.GetComponent<Rigidbody>().AddTorque(new Vector3(UnityEngine.Random.Range(0, 10), UnityEngine.Random.Range(0, 10), UnityEngine.Random.Range(0, 10)));
             piece.GetComponent<Rigidbody>().useGravity = true;
             piece.parent = null;
+            Destroy(piece.gameObject, 1f);
         }
     }
 }

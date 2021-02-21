@@ -7,14 +7,62 @@ public class LevelManager : MonoBehaviour
 {
 	public static LevelManager instance = null;
 
-	public Level levelInfo;
 	public GameObject UIManager;
-
-	private int currentKnifeAmount;
 
 	public int startKnifeAmount;
 
-    public int GetCurrentAppleAmount()
+	public event Action OnKnifeAmountChange;
+	public event Action OnAppleAmountChange;
+
+	public List<Level> levels;
+
+	private int currentKnifeAmount;
+	private static int currentLevelNum = 0;
+
+
+	private void Awake()
+	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if (instance == this)
+		{
+			Destroy(gameObject);
+		}
+	}
+
+	private void Start()
+	{
+		startKnifeAmount = levels[currentLevelNum].startKnifeAmount;
+		InitUI();
+		InitLog();
+		InitKnifeAmount();
+		InitAppleAmount();
+	}
+	public void InitLog()
+	{
+		Instantiate(levels[currentLevelNum].logModel, Log.instance.transform);
+		Log.instance.InitPieces();
+
+		Log.instance.speed = levels[currentLevelNum].logSpeed;
+		Log.instance.curve = levels[currentLevelNum].logRollingCurve;
+		Log.instance.appleChance = levels[currentLevelNum].appleChance;
+		Log.instance.stickedKnivesAmount = levels[currentLevelNum].stickedKnivesAmount;
+
+	}
+
+	public void InitKnifeAmount() => SetCurrentKnifeAmount(startKnifeAmount);
+
+	public void InitAppleAmount() => OnAppleAmountChange.Invoke();
+
+	public void InitUI() => UIManager.SetActive(true);
+
+	public void IncApple() => SetCurrentAppleAmount(GetCurrentAppleAmount() + 1);
+
+	public void ReloadScene() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+
+	public int GetCurrentAppleAmount()
     {
 		return PlayerPrefs.GetInt("apples");
 	}
@@ -36,61 +84,39 @@ public class LevelManager : MonoBehaviour
 		OnKnifeAmountChange.Invoke();
 	}
 
-	public event Action OnKnifeAmountChange;
-	public event Action OnAppleAmountChange;
-
-	void Awake()
+	public void LoadNext()
 	{
-		if (instance == null)
+		if (currentLevelNum < levels.Count - 1)
 		{
-			instance = this;
+			currentLevelNum++;
+			ReloadScene();
 		}
-		else if (instance == this)
+		else
 		{
-			Destroy(gameObject);
+			//ТыКрут();
 		}
 	}
 
-	private void Start()
-	{
-		InitUI();
-		InitLog();
-		InitKnifeAmount();
-		InitAppleAmount();
-	}
-
-	public void InitLog()
-	{
-		Instantiate(levelInfo.logModel, Log.instance.transform);
-		Log.instance.InitPieces();
-
-		Log.instance.speed = levelInfo.logSpeed;
-		Log.instance.curve = levelInfo.logRollingCurve;
-		Log.instance.appleChance = levelInfo.appleChance;
-		Log.instance.stickedKnivesAmount = levelInfo.stickedKnivesAmount;
-
-	}
-
-	public void InitKnifeAmount()
-	{
-		startKnifeAmount = levelInfo.startKnifeAmount;
-		SetCurrentKnifeAmount(startKnifeAmount);
-	}
-
-	public void InitAppleAmount()
-	{
-		OnAppleAmountChange.Invoke();
-	}
-
-	public void InitUI()
-	{
-		UIManager.SetActive(true);
-		print("INIT UI");
-	}
-
-	public void IncApple()
+	public void LoadLevel(int level)
     {
-		SetCurrentAppleAmount(GetCurrentAppleAmount() + 1);
+		if (level < levels.Count - 1)
+		{
+			currentLevelNum = level;
+			ReloadScene();
+		}
+	}
+
+
+	public IEnumerator LoadNextLvl()
+	{
+		yield return new WaitForSeconds(1);
+        instance.LoadNext();
+	}
+
+	public IEnumerator LoadNextLvl(int lvl)
+	{
+		yield return new WaitForSeconds(1);
+		instance.LoadLevel(lvl);
 	}
 }
 

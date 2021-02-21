@@ -18,15 +18,21 @@ public class Knife : MonoBehaviour
         Vibration.Init();
         rb = GetComponent<Rigidbody2D>();
     }
+    private void FixedUpdate()
+    {
+        if (isAimed)
+            rb.velocity = new Vector2(0, speed * 10f);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //KNIFE
         if (collision.transform.GetComponent<Knife>() && isAimed)
         {
             EmitParticles(knifeParticles);
             HitKnife();
-            print("!!!!!!!!!!!!!!!!");
             Vibration.VibratePeek();
+            StartCoroutine(LevelManager.instance.LoadNextLvl(0));
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,13 +43,16 @@ public class Knife : MonoBehaviour
             Log log = collision.GetComponent<Log>();
             if (log)
             {
+                //LOG
                 if (LevelManager.instance.GetCurrentKnifeAmount() > 0)
                 {
                     EmitParticles(logParticles);
                     HitLog();
                     KnifeSpawner.instance.SpawnKnife();
                     Vibration.VibratePop();
+                    Log.instance.ShakeLog();
                 }
+                //WIN
                 else
                 {
                     rb.bodyType = RigidbodyType2D.Kinematic;
@@ -51,20 +60,16 @@ public class Knife : MonoBehaviour
                     Log.instance.Explode();
                     Vibration.Vibrate(1000);
                     enabled = false;
+                    StartCoroutine(LevelManager.instance.LoadNextLvl());
                 }
             }
+            //APPLE
             if (apple)
             {
                 EmitParticles(appleParticles);
                 apple.Hit();
             }
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (isAimed)
-            rb.velocity = new Vector2(0, speed * 10f);
     }
 
     public void Throw()
@@ -104,6 +109,7 @@ public class Knife : MonoBehaviour
         rb.AddForce(new Vector2(Random.Range(-200, 200), 150));
         rb.AddTorque(Random.Range(-5f, 5f));
         transform.parent = null;
+        Destroy(gameObject, 2f);
     }
 
     public void EmitParticles(ParticleSystem particles)

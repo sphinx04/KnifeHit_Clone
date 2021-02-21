@@ -35,10 +35,6 @@ public class KnifeSpawner : MonoBehaviour
         {
             ThrowKnife();
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        }
         
 
     }
@@ -51,7 +47,7 @@ public class KnifeSpawner : MonoBehaviour
             knife.isAimed = true;
             transform.GetChild(0).gameObject.SetActive(false);
             LevelManager.instance.SetCurrentKnifeAmount(LevelManager.instance.GetCurrentKnifeAmount() - 1);
-            StartCoroutine(ThrowTimeout(throwDelay));
+            StartCoroutine(ThrowReload(throwDelay));
 
         }
     }
@@ -61,7 +57,7 @@ public class KnifeSpawner : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
-    IEnumerator ThrowTimeout(float t)
+    IEnumerator ThrowReload(float t)
     {
         yield return new WaitForSeconds(t);
         isReady = true;
