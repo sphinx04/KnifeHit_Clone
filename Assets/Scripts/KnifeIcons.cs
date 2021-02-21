@@ -22,9 +22,14 @@ public class KnifeIcons : MonoBehaviour
 
         for (int i = 0; i < LevelManager.instance.startKnifeAmount; i++)
         {
-            knifeIcons[i] = Instantiate(new GameObject(), transform);
+            //решает проблему дублирования
+            GameObject p; 
+            knifeIcons[i] = Instantiate(p  = new GameObject(), transform);
+
             knifeIcons[i].AddComponent<Image>().sprite = knifeFilled;
             knifeIcons[i].GetComponent<Image>().color = color;
+
+            Destroy(p);
         }
     }
 
