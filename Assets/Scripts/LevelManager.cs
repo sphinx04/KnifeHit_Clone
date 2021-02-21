@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,34 @@ public class LevelManager : MonoBehaviour
 	public Level levelInfo;
 	public GameObject UIManager;
 
+	private int currentKnifeAmount;
+
+	public int startKnifeAmount;
+
+    public int GetCurrentAppleAmount()
+    {
+		return PlayerPrefs.GetInt("apples");
+	}
+
+    public void SetCurrentAppleAmount(int value)
+    {
+		PlayerPrefs.SetInt("apples", value);
+		OnAppleAmountChange.Invoke();
+	}
+
+    public int GetCurrentKnifeAmount()
+	{
+		return currentKnifeAmount;
+	}
+
+	public void SetCurrentKnifeAmount(int value)
+	{
+		currentKnifeAmount = value;
+		OnKnifeAmountChange.Invoke();
+	}
+
+	public event Action OnKnifeAmountChange;
+	public event Action OnAppleAmountChange;
 
 	void Awake()
 	{
@@ -26,7 +55,8 @@ public class LevelManager : MonoBehaviour
 	{
 		InitUI();
 		InitLog();
-		InitKnifeSpawner();
+		InitKnifeAmount();
+		InitAppleAmount();
 	}
 
 	public void InitLog()
@@ -39,15 +69,27 @@ public class LevelManager : MonoBehaviour
 		Log.instance.stickedKnivesAmount = levelInfo.stickedKnivesAmount;
 	}
 
-	public void InitKnifeSpawner()
+	public void InitKnifeAmount()
 	{
-		KnifeSpawner.instance.SetCurrentKnifeAmount(levelInfo.startKnifeAmount);
+		startKnifeAmount = levelInfo.startKnifeAmount;
+		SetCurrentKnifeAmount(startKnifeAmount);
+	}
+
+	public void InitAppleAmount()
+	{
+		OnAppleAmountChange.Invoke();
+		//SetCurrentAppleAmount(GetCurrentAppleAmount());
 	}
 
 	public void InitUI()
 	{
 		UIManager.SetActive(true);
 		print("INIT UI");
+	}
+
+	public void IncApple()
+    {
+		SetCurrentAppleAmount(GetCurrentAppleAmount() + 1);
 	}
 }
 

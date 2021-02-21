@@ -8,21 +8,7 @@ public class KnifeSpawner : MonoBehaviour
     public static KnifeSpawner instance = null;
 
     public GameObject knifeObject;
-    private int currentKnifeAmount;
     private Knife knife;
-
-    public int GetCurrentKnifeAmount()
-    {
-        return currentKnifeAmount;
-    }
-
-    public void SetCurrentKnifeAmount(int value)
-    {
-        currentKnifeAmount = value;
-        OnKnifeAmountChange.Invoke();
-    }
-
-    public event Action OnKnifeAmountChange;
 
     void Awake()
     {
@@ -56,12 +42,12 @@ public class KnifeSpawner : MonoBehaviour
     }
     public void ThrowKnife()
     {
-        if (GetCurrentKnifeAmount() > 0)
+        if (LevelManager.instance.GetCurrentKnifeAmount() > 0)
         {
             knife = Instantiate(knifeObject, transform).GetComponent<Knife>();
             knife.isAimed = true;
             transform.GetChild(0).gameObject.SetActive(false);
-            SetCurrentKnifeAmount(GetCurrentKnifeAmount() - 1);
+            LevelManager.instance.SetCurrentKnifeAmount(LevelManager.instance.GetCurrentKnifeAmount() - 1);
         }
     }
 

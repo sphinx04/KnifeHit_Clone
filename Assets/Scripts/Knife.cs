@@ -31,7 +31,7 @@ public class Knife : MonoBehaviour
             Log log = collision.GetComponent<Log>();
             if (log)
             {
-                if (KnifeSpawner.instance.GetCurrentKnifeAmount() > 0)
+                if (LevelManager.instance.GetCurrentKnifeAmount() > 0)
                 {
                     HitLog();
                     KnifeSpawner.instance.SpawnKnife();

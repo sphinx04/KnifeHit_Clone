@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class KnifeCount : MonoBehaviour
 {
+    public GameObject knifeAmountIcons;
     [SerializeField]
-    private KnifeSpawner spawner;
-    [SerializeField]
-    private TextMeshProUGUI text;
+    private TextMeshProUGUI knifeAmountText;
 
-    private void OnEnable() => KnifeSpawner.instance.OnKnifeAmountChange += UpdateValue;
-    private void OnDisable() => spawner.OnKnifeAmountChange -= UpdateValue;
+    private void Start()
+    {
+        knifeAmountIcons.SetActive(true);
+    }
 
-    public void UpdateValue() => text.SetText(spawner.GetCurrentKnifeAmount().ToString());
+    private void OnEnable() => LevelManager.instance.OnKnifeAmountChange += UpdateKnifeAmountText;
+
+    private void OnDisable() => LevelManager.instance.OnKnifeAmountChange -= UpdateKnifeAmountText;
+
+    public void UpdateKnifeAmountText() => knifeAmountText.SetText(LevelManager.instance.GetCurrentKnifeAmount().ToString());
 }

@@ -24,10 +24,9 @@ public class Apple : MonoBehaviour
             piece.GetComponent<Rigidbody2D>().AddForce(new Vector2((1 - i * 2) * 50f, 100f));
             piece.AddComponent<SpriteRenderer>().sprite = sprites[i];
         }
-        PlayerPrefs.SetInt("apples", PlayerPrefs.GetInt("apples") + 1);
-        print(PlayerPrefs.GetInt("apples"));
         Destroy(gameObject);
 
+        LevelManager.instance.IncApple();
         Log.instance.apples.Remove(this);
     }
     public void FreeFall()
