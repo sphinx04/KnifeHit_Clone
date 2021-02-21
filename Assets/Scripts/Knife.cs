@@ -9,6 +9,9 @@ public class Knife : MonoBehaviour
     public bool sticked;
     private Rigidbody2D rb;
     public TrailRenderer trail;
+    public ParticleSystem logParticles;
+    public ParticleSystem appleParticles;
+    public ParticleSystem knifeParticles;
 
     private void Awake()
     {
@@ -20,7 +23,9 @@ public class Knife : MonoBehaviour
     {
         if (collision.transform.GetComponent<Knife>() && isAimed)
         {
+            EmitParticles(knifeParticles);
             HitKnife();
+            print("!!!!!!!!!!!!!!!!");
             Vibration.VibratePeek();
         }
     }
@@ -34,6 +39,7 @@ public class Knife : MonoBehaviour
             {
                 if (LevelManager.instance.GetCurrentKnifeAmount() > 0)
                 {
+                    EmitParticles(logParticles);
                     HitLog();
                     KnifeSpawner.instance.SpawnKnife();
                     Vibration.VibratePop();
@@ -41,6 +47,7 @@ public class Knife : MonoBehaviour
                 else
                 {
                     rb.bodyType = RigidbodyType2D.Kinematic;
+                    isAimed = false;
                     Log.instance.Explode();
                     Vibration.Vibrate(1000);
                     enabled = false;
@@ -48,6 +55,7 @@ public class Knife : MonoBehaviour
             }
             if (apple)
             {
+                EmitParticles(appleParticles);
                 apple.Hit();
             }
         }
@@ -96,5 +104,10 @@ public class Knife : MonoBehaviour
         rb.AddForce(new Vector2(Random.Range(-200, 200), 150));
         rb.AddTorque(Random.Range(-5f, 5f));
         transform.parent = null;
+    }
+
+    public void EmitParticles(ParticleSystem particles)
+    {
+        Destroy(Instantiate(particles, transform.position, new Quaternion()), 1);
     }
 }

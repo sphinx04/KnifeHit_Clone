@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knifeObject: {fileID: 6216443703508846173, guid: 9fb8503ffffd44ed5aaa43e513791d06, type: 3}
+  throwDelay: 0.1
 --- !u!1001 &7933210096851298430
 PrefabInstance:
   m_ObjectHideFlags: 0

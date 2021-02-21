@@ -154,7 +154,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -346,6 +346,9 @@ MonoBehaviour:
   speed: 1
   sticked: 0
   trail: {fileID: 8859721611031647977}
+  logParticles: {fileID: 2281492772172461852, guid: 4a8738e6fe81d46a8a9f24e24abb76ae, type: 3}
+  appleParticles: {fileID: 2281492772172461852, guid: c2d16cfb731674695b52ab703d3a6932, type: 3}
+  knifeParticles: {fileID: 2281492772172461852, guid: 0b3ec7050ff60434f87342dca7ac1914, type: 3}
 --- !u!50 &6133291360059333643
 Rigidbody2D:
   serializedVersion: 4

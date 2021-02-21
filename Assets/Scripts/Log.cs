@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -43,14 +44,19 @@ public class Log : MonoBehaviour
         }
         GenerateKnives();
 
+        InitPieces();
+
+        RotateLog(UnityEngine.Random.Range(0, 180));
+    }
+
+    public void InitPieces()
+    {
         pieces = new List<Transform>();
 
         for (int i = 0; i < transform.GetChild(0).childCount; i++)
         {
             pieces.Add(transform.GetChild(0).GetChild(i));
         }
-
-        RotateLog(Random.Range(0, 180));
     }
 
     public void Stop()
@@ -69,7 +75,7 @@ public class Log : MonoBehaviour
     }
     private bool isAppleGenerating()
     {
-        return Random.Range(0f, 1f) <= appleChance;
+        return UnityEngine.Random.Range(0f, 1f) <= appleChance;
     }
 
     private void GenerateApple()
@@ -117,7 +123,7 @@ public class Log : MonoBehaviour
         {
             piece.GetComponent<MeshCollider>().enabled = true;
             piece.GetComponent<Rigidbody>().AddExplosionForce(100f, new Vector3(), 3f);
-            piece.GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(0, 10), Random.Range(0, 10), Random.Range(0, 10)));
+            piece.GetComponent<Rigidbody>().AddTorque(new Vector3(UnityEngine.Random.Range(0, 10), UnityEngine.Random.Range(0, 10), UnityEngine.Random.Range(0, 10)));
             piece.GetComponent<Rigidbody>().useGravity = true;
             piece.parent = null;
         }

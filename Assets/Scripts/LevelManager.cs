@@ -62,11 +62,13 @@ public class LevelManager : MonoBehaviour
 	public void InitLog()
 	{
 		Instantiate(levelInfo.logModel, Log.instance.transform);
+		Log.instance.InitPieces();
 
 		Log.instance.speed = levelInfo.logSpeed;
 		Log.instance.curve = levelInfo.logRollingCurve;
 		Log.instance.appleChance = levelInfo.appleChance;
 		Log.instance.stickedKnivesAmount = levelInfo.stickedKnivesAmount;
+
 	}
 
 	public void InitKnifeAmount()
@@ -78,7 +80,6 @@ public class LevelManager : MonoBehaviour
 	public void InitAppleAmount()
 	{
 		OnAppleAmountChange.Invoke();
-		//SetCurrentAppleAmount(GetCurrentAppleAmount());
 	}
 
 	public void InitUI()
