@@ -18,9 +18,10 @@ public class Knife : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.GetComponent<Knife>())
+        if (collision.transform.GetComponent<Knife>() && isAimed)
         {
             HitKnife();
+            Vibration.VibratePeek();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,11 +36,14 @@ public class Knife : MonoBehaviour
                 {
                     HitLog();
                     KnifeSpawner.instance.SpawnKnife();
+                    Vibration.VibratePop();
                 }
                 else
                 {
                     rb.bodyType = RigidbodyType2D.Kinematic;
                     Log.instance.Explode();
+                    Vibration.Vibrate(1000);
+                    enabled = false;
                 }
             }
             if (apple)
@@ -71,7 +75,6 @@ public class Knife : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
         Stop();
         sticked = true;
-        Vibration.VibratePop();
         transform.parent = Log.instance.transform;
         transform.position = Log.instance.transform.position + new Vector3(0, Log.instance.stickDepth - Log.instance.transform.localScale.y / 2, 0);
         Log.instance.knives.Add(this);
@@ -80,7 +83,6 @@ public class Knife : MonoBehaviour
     public void HitKnife()
     {
         Stop();
-        Vibration.VibratePeek();
         rb.gravityScale = 5;
         Log.instance.Stop();
         GetComponentsInChildren<CircleCollider2D>()[0].enabled = false; //это ужасно
