@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        //PlayerPrefs.SetInt("maxLvl", 0);
     }
 
     public void StartGame()
@@ -45,5 +45,10 @@ public class GameManager : MonoBehaviour
     public int GetCurrentAppleAmount()
     {
         return PlayerPrefs.GetInt("apples");
+    }
+
+    public int GetMaxLvlNum()
+    {
+        return PlayerPrefs.GetInt("maxLvl");
     }
 }

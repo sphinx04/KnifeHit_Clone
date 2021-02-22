@@ -6,17 +6,12 @@ using TMPro;
 public class StartScreenUIManager : MonoBehaviour
 {
     public TextMeshProUGUI appleCounter;
-    public TextMeshProUGUI highestLvlCounter;
+    public TextMeshProUGUI maxLvlCounter;
 
     // Start is called before the first frame update
     void Start()
     {
         appleCounter.text = GameManager.instance.GetCurrentAppleAmount().ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        maxLvlCounter.text = GameManager.instance.GetMaxLvlNum().ToString();
     }
 }

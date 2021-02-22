@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf1708a9618342589520c3531435c6b, type: 3}
   m_Name: TestLevel 9
   m_EditorClassIdentifier: 
-  startKnifeAmount: 10
+  startKnifeAmount: 5
   stickedKnivesAmount: 5
   appleChance: 0.5
   logSpeed: 3
@@ -20,24 +20,51 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: -0.99676514
-      inSlope: 2
-      outSlope: 2
+      time: -0.033050537
+      value: 0.99694824
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.5304907
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 6.3588495
-      outSlope: 6.3588495
+      time: 1.5183293
+      value: -0.99985087
+      inSlope: 0.00035212573
+      outSlope: 0.00035212573
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.08688551
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3.5188556
+      value: -0.00016820431
+      inSlope: 0.0013176276
+      outSlope: 0.0013176276
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5.847356
+      value: -0.9958117
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 7.2520313
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 0
+    m_PostInfinity: 1
     m_RotationOrder: 4
   logModel: {fileID: 8234091364114820669, guid: 273b0bdb2512e470cb7df18e0d2e3f76, type: 3}

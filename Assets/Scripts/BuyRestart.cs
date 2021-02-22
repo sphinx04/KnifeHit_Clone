@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class BuyRestart : MonoBehaviour
 {
-    public int price;
 
-public void Restart()
+public void Restart(int price)
     {
         int currentAppleAmount = LevelManager.instance.GetCurrentAppleAmount();
         if (currentAppleAmount >= price)

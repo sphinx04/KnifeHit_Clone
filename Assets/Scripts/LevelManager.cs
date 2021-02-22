@@ -94,6 +94,10 @@ public class LevelManager : MonoBehaviour
 	{
 		if (currentLevelNum < levels.Count - 1)
 		{
+			if(PlayerPrefs.GetInt("maxLvl") < currentLevelNum + 1)
+            {
+				PlayerPrefs.SetInt("maxLvl", currentLevelNum + 1);
+            }
 			currentLevelNum++;
 			ReloadScene(); // replace with dialog window
 		}
