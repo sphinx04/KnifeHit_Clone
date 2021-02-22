@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abf1708a9618342589520c3531435c6b, type: 3}
-  m_Name: TestLevel 1
+  m_Name: TestLevel 5
   m_EditorClassIdentifier: 
-  startKnifeAmount: 5
-  stickedKnivesAmount: 1
+  startKnifeAmount: 8
+  stickedKnivesAmount: 0
   appleChance: 0.5
-  logSpeed: 2.35
+  logSpeed: 4
   logRollingCurve:
     serializedVersion: 2
     m_Curve:

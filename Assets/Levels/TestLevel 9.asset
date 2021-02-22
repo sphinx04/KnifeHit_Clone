@@ -10,34 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abf1708a9618342589520c3531435c6b, type: 3}
-  m_Name: TestLevel 1
+  m_Name: TestLevel 9
   m_EditorClassIdentifier: 
-  startKnifeAmount: 5
-  stickedKnivesAmount: 1
+  startKnifeAmount: 10
+  stickedKnivesAmount: 5
   appleChance: 0.5
-  logSpeed: 2.35
+  logSpeed: 3
   logRollingCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      value: -0.99676514
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      inSlope: 6.3588495
+      outSlope: 6.3588495
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.08688551
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PostInfinity: 0
     m_RotationOrder: 4
   logModel: {fileID: 8234091364114820669, guid: 273b0bdb2512e470cb7df18e0d2e3f76, type: 3}

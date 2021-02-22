@@ -32,7 +32,8 @@ public class Knife : MonoBehaviour
             EmitParticles(knifeParticles);
             HitKnife();
             Vibration.VibratePeek();
-            StartCoroutine(LevelManager.instance.LoadNextLvl(0));
+            StartCoroutine(LevelManager.instance.DisplayLoosePanel());
+            //StartCoroutine(LevelManager.instance.LoadNextLvl(0));
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -106,7 +107,7 @@ public class Knife : MonoBehaviour
     {
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 0.5f;
-        rb.AddForce(new Vector2(Random.Range(-200, 200), 150));
+        rb.AddForce(new Vector2(Random.Range(-200, 200), 100));
         rb.AddTorque(Random.Range(-5f, 5f));
         transform.parent = null;
         Destroy(gameObject, 2f);

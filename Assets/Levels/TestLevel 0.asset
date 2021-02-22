@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf1708a9618342589520c3531435c6b, type: 3}
   m_Name: TestLevel 0
   m_EditorClassIdentifier: 
-  startKnifeAmount: 9
+  startKnifeAmount: 4
   stickedKnivesAmount: 0
   appleChance: 0.5
   logSpeed: 2.35

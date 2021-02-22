@@ -11,6 +11,10 @@ public class LevelManager : MonoBehaviour
 
 	public int startKnifeAmount;
 
+	public GameObject winPanel;
+	public GameObject loosePanel;
+	public TMPro.TextMeshProUGUI levelLabel;
+
 	public event Action OnKnifeAmountChange;
 	public event Action OnAppleAmountChange;
 
@@ -39,6 +43,8 @@ public class LevelManager : MonoBehaviour
 		InitLog();
 		InitKnifeAmount();
 		InitAppleAmount();
+
+		levelLabel.text += currentLevelNum + 1;
 	}
 	public void InitLog()
 	{
@@ -89,21 +95,34 @@ public class LevelManager : MonoBehaviour
 		if (currentLevelNum < levels.Count - 1)
 		{
 			currentLevelNum++;
-			ReloadScene();
+			ReloadScene(); // replace with dialog window
 		}
 		else
 		{
-			//ТыКрут();
+			currentLevelNum = 0;
+			DisplayWinPanel();
 		}
 	}
 
 	public void LoadLevel(int level)
     {
-		if (level < levels.Count - 1)
+		if (currentLevelNum < levels.Count)
 		{
 			currentLevelNum = level;
 			ReloadScene();
 		}
+	}
+
+	public void DisplayWinPanel()
+	{
+		winPanel.SetActive(true);
+	}
+
+	public IEnumerator DisplayLoosePanel()
+	{
+		yield return new WaitForSeconds(1f);
+		currentLevelNum = 0;
+		loosePanel.SetActive(true);
 	}
 
 
@@ -118,6 +137,12 @@ public class LevelManager : MonoBehaviour
 		yield return new WaitForSeconds(1);
 		instance.LoadLevel(lvl);
 	}
+
+	public void ToStartScreen()
+	{
+		UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreen");
+	}
+
 }
 
 
