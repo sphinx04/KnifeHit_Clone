@@ -121,7 +121,6 @@ public class LevelManager : MonoBehaviour
 	public IEnumerator DisplayLoosePanel()
 	{
 		yield return new WaitForSeconds(1f);
-		currentLevelNum = 0;
 		loosePanel.SetActive(true);
 	}
 
@@ -140,6 +139,7 @@ public class LevelManager : MonoBehaviour
 
 	public void ToStartScreen()
 	{
+		currentLevelNum = 0;
 		UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreen");
 	}
 

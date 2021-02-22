@@ -9,7 +9,7 @@ public class KnifeSpawner : MonoBehaviour
 
     public GameObject knifeObject;
     private Knife knife;
-    private bool isReady = true;
+    private bool isReady;
     public float throwDelay = 0.1f;
 
     void Awake()
@@ -27,6 +27,7 @@ public class KnifeSpawner : MonoBehaviour
     private void Start()
     {
         SpawnKnife();
+        StartCoroutine(ThrowReload(throwDelay));
     }
 
     void Update()
@@ -35,9 +36,8 @@ public class KnifeSpawner : MonoBehaviour
         {
             ThrowKnife();
         }
-        
-
     }
+
     public void ThrowKnife()
     {
         if (LevelManager.instance.GetCurrentKnifeAmount() > 0)

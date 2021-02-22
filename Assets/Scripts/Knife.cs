@@ -59,7 +59,7 @@ public class Knife : MonoBehaviour
                     rb.bodyType = RigidbodyType2D.Kinematic;
                     isAimed = false;
                     Log.instance.Explode();
-                    Vibration.Vibrate(1000);
+                    Vibration.Vibrate(200);
                     enabled = false;
                     StartCoroutine(LevelManager.instance.LoadNextLvl());
                 }
